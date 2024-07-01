@@ -15,32 +15,31 @@
     <script>
       function addtodo() {
         const inputValue = document.getElementById("input").value;
-        //create new element <li>
-        let newElement = document.createElement("li"); //<li></li>
-        newElement.classList.add("list-group-item"); //<li class="list-group-item"></li>
-        let newTxtElement = document.createTextNode(inputValue); //create Text
-        newElement.appendChild(newTxtElement); //<li>Text</li>
+        if (inputValue.trim() === "") return; // Ignore empty input
+        let newElement = document.createElement("li");
+        newElement.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        
+        let newTxtElement = document.createTextNode(inputValue);
+        newElement.appendChild(newTxtElement);
 
         let listElement = document.getElementById("listtodo");
         listElement.appendChild(newElement);
-      }
-      function deletetodo(){
-        let deleteButton = document.createElement("button");
-        deleteButton.classList.add("btn", "btn-danger", "btn-sm");
-        deleteButton.innerHTML = "Delete";
-        deleteButton.onclick = function () {
-          newElement.remove();
+
+        function deletetodo() {
+            let deleteButton = document.createElement("button");
+            deleteButton.classList.add("btn", "btn-danger", "btn-sm");
+            deleteButton.innerHTML = "Delete";
+            deleteButton.onclick = function () {
+            newElement.remove();
         };
+        
         newElement.appendChild(deleteButton);
-
-        let listElement = document.getElementById("listtodo");
-        listElement.appendChild(newElement);
-
-        document.getElementById("input").value = "";    
+        }
+        document.getElementById("input").value = "";
       }
     </script>
     <div class="container">
-      <h1 class="my-3">To-Do Today List</h1>
+      <h1 class="my-3">My to-do</h1>
       <div class="row">
         <div class="col col-md-4 col-sm-12">
           <div class="input-group mb-3">
@@ -64,8 +63,10 @@
         </div>
         <div class="col col-md-8 col-sm-12">
           <ul class="list-group" id="listtodo">
-            <li class="list-group-item">An item</li>
-                <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">Delete</button>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              An item
+              <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">Delete</button>
+            </li>
           </ul>
         </div>
       </div>
