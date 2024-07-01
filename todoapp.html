@@ -24,9 +24,23 @@
         let listElement = document.getElementById("listtodo");
         listElement.appendChild(newElement);
       }
+      function deletetodo(){
+        let deleteButton = document.createElement("button");
+        deleteButton.classList.add("btn", "btn-danger", "btn-sm");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.onclick = function () {
+          newElement.remove();
+        };
+        newElement.appendChild(deleteButton);
+
+            let listElement = document.getElementById("listtodo");
+            listElement.appendChild(newElement);
+
+    document.getElementById("input").value = "";    
+      }
     </script>
     <div class="container">
-      <h1 class="my-3">To-Do Today                            List</h1>
+      <h1 class="my-3">To-Do Today List</h1>
       <div class="row">
         <div class="col col-md-4 col-sm-12">
           <div class="input-group mb-3">
@@ -51,6 +65,7 @@
         <div class="col col-md-8 col-sm-12">
           <ul class="list-group" id="listtodo">
             <li class="list-group-item">An item</li>
+            <button class="btn btn-danger btn-sm" onclick="this.parentElement.remove()">Delete</button>
           </ul>
         </div>
       </div>
