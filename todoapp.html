@@ -8,6 +8,9 @@
   </head>
   <body>
     <script>
+        function addtodo(){
+            
+        }
     </script>
     <div class="container"> 
         <h1 class="my-3">My to-do</h1>
@@ -19,11 +22,13 @@
                         class="form-control" 
                         placeholder="ใส่สิ่งที่คุณต้องการจะทำ" 
                         aria-label="todo name"
-                        aria-describedby="button-addon2">
+                        aria-describedby="button-add">
                     <button 
-                        class="btn btn-outline-secondary" 
-                        type="button" id="button-addon2">Button</button>
-                  </div>
+                        class="btn btn-primary" 
+                        type="button"
+                        id="button-add"
+                        onclick="addtodo()">+</button>
+                </div>
             </div>
             <div class="col-md-8 col-sm-12">
 
