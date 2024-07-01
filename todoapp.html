@@ -25,16 +25,15 @@
         let listElement = document.getElementById("listtodo");
         listElement.appendChild(newElement);
 
-        function deletetodo() {
-            let deleteButton = document.createElement("button");
-            deleteButton.classList.add("btn", "btn-danger", "btn-sm");
-            deleteButton.innerHTML = "Delete";
-            deleteButton.onclick = function () {
-            newElement.remove();
+      function deletetodo() {
+        let deleteButton = document.createElement("button");
+        deleteButton.classList.add("btn", "btn-danger", "btn-sm");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.onclick = function () {
+        newElement.remove();
         };
-        
-        }
         newElement.appendChild(deleteButton);
+        }
         document.getElementById("input").value = "";
       }
     </script>
