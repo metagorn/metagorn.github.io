@@ -9,12 +9,17 @@
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
           crossorigin="anonymous"
         />
+        <style>
+            .card {
+                margin-bottom: 1rem;
+            }
+        </style>
       </head>
       <body>
           <div class="container">
               <h1>Pokedex Lab</h1>
           </div>
-          <div> id= "name"</div>
+          <div> id= "name" class="row"</div>
           <script>
               fetch("https://pokeapi.co/api/v2/pokemon")
               .than((res) => res.json()) 
