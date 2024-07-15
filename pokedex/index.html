@@ -21,21 +21,22 @@
       <div id="name" class="row"></div>
     </div>
     <script>
-      fetch("https://pokeapi.co/api/v2/pokemon")
+      fetch("https://pokeapi.co/api/v2/pokemon?limit=20")
         .then((res) => res.json())
         .then((data) => {
           const datas = data["results"];
           const ele = document.getElementById("name");
-          datas.forEach((element) => {
-            ele.innerHTML += "<div class='col-3'>" + 
-                "<div class='card'>" + 
-                "<img class='card-img-top' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png'>" +
-                "<img class='card-img-top' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png'>" +
-                "<img class='card-img-top' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png'>" +
-                "<img class='card-img-top' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png'>" + 
-                "<div class='card-body'>" + 
-                element["name"] + 
-                "</div></div></div>";
+          datas.forEach((element, index) => {
+            const pokemonId = index + 1; 
+            const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+            ele.innerHTML += `
+            <div class='col-3'>
+            <div class='card'>
+            <img class='card-img-top' src='${imgSrc}' alt='${element["name"]}'>
+            <div class='class-body ps-3'>
+            ${element["name"]}
+            </div></div></div>`
+            
           });
         })
         .catch((err) => console.error(err));
