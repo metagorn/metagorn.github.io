@@ -27,7 +27,7 @@
                   const datas = data["result"];
                   const ele = document.getElementById("name")
                   datas.forEach((element)=> {
-                      ele.innerHTML += "<div class= 'col'" + element["name"] + " ";
+                      ele.innerHTML += "<div class= 'col-3'>" + "<div class= 'card'>" + "<div class= 'card-body'>" +element["name"] + " "; + "</div></div></div>";
                   })
                   console.log(datas);
               })
