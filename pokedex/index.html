@@ -27,7 +27,13 @@
           const datas = data["results"];
           const ele = document.getElementById("name");
           datas.forEach((element) => {
-            ele.innerHTML += "<div class='col-3'>" + "<div class='card'>" + "<div class='card-body'>" + element["name"] + "</div></div></div>";
+            //https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/other/showdown/25.gif
+            ele.innerHTML += "<div class='col-3'>" + 
+                "<div class='card'>" + 
+                "<img class='card-img-top' src=''>" + 
+                "<div class='card-body'>" + 
+                element["name"] + 
+                "</div></div></div>";
           });
         })
         .catch((err) => console.error(err));
