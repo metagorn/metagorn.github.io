@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แอปพลิเคชั่นพยากรณ์อากาศ</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; 
+        }
+        .container {
+            margin-top: 50px;
+        }
+        #weather-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">แอปพลิเคชั่นพยากรณ์อากาศ</h1>
+        <div class="form-group">
+            <label for="cityInput">กรุณากรอกชื่อเมือง:</label>
+            <input type="text" class="form-control" id="cityInput" placeholder="เช่น Bangkok หรือ Udonthani">
+        </div>
+        <button class="btn btn-primary w-100" id="getWeatherBtn">ดูพยากรณ์อากาศ</button>
+        <div id="weather-container"></div>
+    </div>
+
+    <script>
+        async function GetWeather(city) {
+            const apiendpoint = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0ff615620c7a022719a535072cca29e8&units=metric`; 
+            const res = await fetch(apiendpoint).then((response) => response.json());
+            return res;
+        }
+
+        document.getElementById('getWeatherBtn').addEventListener('click', async () => {
+            const cityInput = document.getElementById('cityInput').value;
+            const weatherContainer = document.getElementById('weather-container');
+
+            if (cityInput) {
+                const weatherData = await GetWeather(cityInput);
+                
+                if (weatherData.cod === 200) { 
+                    const date = new Date(weatherData.dt * 1000);
+                    const feels_like = weatherData.main.feels_like;
+                    const humidity = weatherData.main.humidity;
+                    const pressure = weatherData.main.pressure;
+                    const temp = weatherData.main.temp;
+                    const temp_max = weatherData.main.temp_max;
+                    const temp_min = weatherData.main.temp_min;
+                    const wind_speed = weatherData.wind.speed;
+                    const current_weather = weatherData.weather[0]; 
+                    weatherContainer.innerHTML = `
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">พยากรณ์อากาศใน ${weatherData.name}, ${weatherData.sys.country}</h5>
+                                <p class="card-text">วันที่: ${date.toUTCString()}</p>
+                                <p class="card-text">อุณหภูมิ: ${temp} °C</p>
+                                <p class="card-text">รู้สึกเหมือน: ${feels_like} °C</p>
+                                <p class="card-text">ความชื้น: ${humidity}%</p>
+                                <p class="card-text">ความกดอากาศ: ${pressure} hPa</p>
+                                <p class="card-text">ความเร็วลม: ${wind_speed} m/s</p>
+                                <img src="http://openweathermap.org/img/wn/${current_weather.icon}@2x.png" alt="${current_weather.description}" class="img-fluid">
+                                <p class="card-text">${current_weather.description}</p>
+                            </div>
+                        </div>
+                    `;
+                } else { 
+                    weatherContainer.innerHTML = `<div class="alert alert-danger" role="alert">ไม่พบเมืองที่ระบุ!</div>`;
+                }
+            } else {
+                weatherContainer.innerHTML = `<div class="alert alert-warning" role="alert">กรุณากรอกชื่อเมือง.</div>`;
+            }
+        });
+    </script>
+</body>
+</html>
